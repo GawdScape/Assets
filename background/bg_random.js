@@ -19,8 +19,16 @@ const img_files = [
 	'2017-03-15_19.16.00.png',
 ];
 
-function setRandomBackground() {
+function getRandomImage() {
 	img_index = Math.floor(Math.random() * img_files.length);
-	img_selected = img_files[img_index];
-	document.body.style.backgroundImage = "url('"+img_url+img_selected+"')";
+	return img_files[img_index];
+}
+
+function loadBackground() {
+	img_bg = sessionStorage.getItem("img_bg");
+	if (!img_bg) {
+		img_bg = getRandomImage();
+		sessionStorage.setItem("img_bg", img_bg);
+	}
+	document.body.style.backgroundImage = `url('${img_url}${img_bg}')`;
 }
